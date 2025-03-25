@@ -20,6 +20,7 @@ An MCP server that provides a tool for sending transactional emails via Mailtrap
 Edit the Claude for Desktop configuration file:
 
 **Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
 Add the following configuration:
@@ -54,11 +55,12 @@ Sends a transactional email through Mailtrap.
 **Parameters:**
 - `to` (required): Email address of the recipient
 - `subject` (required): Email subject line
-- `text` (required): Email body text
+- `from` (optional): Email address of the sender, if not provided "DEFAULT_FROM_EMAIL" will be used
+- `text` (optional): Email body text, require if "html" is empty
+- `html` (optional): HTML version of the email body, required if "text" is empty
 - `cc` (optional): Array of CC recipient email addresses
 - `bcc` (optional): Array of BCC recipient email addresses
 - `category` (optional): Email category for tracking
-- `html` (optional): HTML version of the email body
 
 ## Testing
 
