@@ -1,4 +1,4 @@
-# Mailtrap MCP Server
+# MCP Mailtrap Server
 
 An MCP server that provides a tool for sending transactional emails via Mailtrap
 
@@ -6,8 +6,8 @@ An MCP server that provides a tool for sending transactional emails via Mailtrap
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/railsware/mcp-mailtrap.git
-   cd mcp-mailtrap
+   git clone https://github.com/railsware/mailtrap-mcp.git
+   cd mailtrap-mcp
    ```
 
 2. Install dependencies:
@@ -31,7 +31,7 @@ Add the following configuration:
       "args": ["/path/to/mailtrap-mcp/dist/index.js"],
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "FROM_EMAIL": "your_sender@domain.com",
+        "DEFAULT_FROM_EMAIL": "your_sender@domain.com",
       }
     }
   }
@@ -65,10 +65,9 @@ Sends a transactional email through Mailtrap.
 You can test the server using the MCP Inspector:
 
 ```bash
-npm install -g @modelcontextprotocol/inspector
-npx @modelcontextprotocol/inspector node dist/index.js
+npm run dev
 ```
 
 ## License
 
-MIT
+The package is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

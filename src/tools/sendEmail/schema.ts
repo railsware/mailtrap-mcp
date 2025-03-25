@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const hasDefaultFromEmail = !!process.env.FROM_EMAIL;
+const hasDefaultFromEmail = !!process.env.DEFAULT_FROM_EMAIL;
 
 const sendEmailSchema = {
   from: hasDefaultFromEmail
