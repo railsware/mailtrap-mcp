@@ -12,6 +12,9 @@
   ],
   "main": "dist/index.js",
   "scripts": {
+    "lint": "npm run lint:eslint && npm run lint:tsc",
+    "lint:eslint": "npx eslint . --ext .js,.ts",
+    "lint:tsc": "tsc -p . --noEmit --incremental false",
     "build": "rm -rf dist && tsc --project tsconfig.build.json",
     "prepublish": "npm run build && chmod +x dist/index.js",
     "dev": "npx @modelcontextprotocol/inspector node dist/index.js"
@@ -28,6 +31,15 @@
   "devDependencies": {
     "@modelcontextprotocol/inspector": "^0.6.0",
     "@types/node": "^22.13.13",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.8.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   }

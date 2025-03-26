@@ -1,9 +1,10 @@
-import { SendMailToolRequest } from "../../types/mailtrap";
-
 import { Address, Mail } from "mailtrap";
+import { SendMailToolRequest } from "../../types/mailtrap";
+import sendEmailSchema from "./schema";
+
 import { client } from "../../client";
 
-const DEFAULT_FROM_EMAIL = process.env.DEFAULT_FROM_EMAIL;
+const { DEFAULT_FROM_EMAIL } = process.env;
 
 export async function sendEmail({
   from,
@@ -37,15 +38,16 @@ export async function sendEmail({
     const emailData: Mail = {
       from: fromAddress,
       to: [toAddress],
-      subject: subject,
-      text: text,
-      html: html,
-      category: category,
+      subject,
+      text,
+      html,
+      category,
     };
 
     if (cc && cc.length > 0) emailData.cc = cc.map((email) => ({ email }));
     if (bcc && bcc.length > 0) emailData.bcc = bcc.map((email) => ({ email }));
 
+    // eslint-disable-next-line no-console
     console.error("Sending email with params:", emailData);
 
     const response = await client.send(emailData);
@@ -54,11 +56,14 @@ export async function sendEmail({
       content: [
         {
           type: "text",
-          text: `Email sent successfully to ${to}.\nMessage IDs: ${response.message_ids}\nStatus: ${response.success ? "Success" : "Failed"}`,
+          text: `Email sent successfully to ${to}.\nMessage IDs: ${
+            response.message_ids
+          }\nStatus: ${response.success ? "Success" : "Failed"}`,
         },
       ],
     };
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Error sending email:", error);
 
     const errorMessage = error instanceof Error ? error.message : String(error);
@@ -75,4 +80,4 @@ export async function sendEmail({
   }
 }
 
-export { sendEmailSchema } from "./schema";
+export { sendEmailSchema };

@@ -6,15 +6,16 @@ An MCP server that provides a tool for sending transactional emails via Mailtrap
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/railsware/mailtrap-mcp.git
-   cd mailtrap-mcp
-   ```
+```bash
+git clone https://github.com/railsware/mailtrap-mcp.git
+cd mailtrap-mcp
+```
 
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
+
+```bash
+npm install
+```
 
 ## Configuration with Claude for Desktop
 
@@ -44,14 +45,13 @@ Add the following configuration:
 If you are using `asdf` for managing Node.js you should use absolute path to executable:
 
 (example for Mac)
+
 ```json
 {
   "mcpServers": {
     "mailtrap": {
       "command": "/Users/<username>/.asdf/shims/node",
-      "args": [
-        "/path/to/mailtrap-mcp/dist/index.js"
-      ],
+      "args": ["/path/to/mailtrap-mcp/dist/index.js"],
       "env": {
         "PATH": "/Users/<username>/.asdf/shims:/usr/bin:/bin",
         "ASDF_DIR": "/opt/homebrew/opt/asdf/libexec",

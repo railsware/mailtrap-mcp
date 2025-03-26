@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
 import dotenv from "dotenv";
 import CONFIG from "./config";
 
@@ -18,7 +18,7 @@ server.tool(
   "send-email",
   "Send transactional email",
   sendEmailSchema,
-  sendEmail,
+  sendEmail
 );
 
 async function main() {
@@ -28,6 +28,7 @@ async function main() {
 }
 
 main().catch((error) => {
+  // eslint-disable-next-line no-console
   console.error("Fatal error:", error);
   process.exit(1);
 });
