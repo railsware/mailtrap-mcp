@@ -5,6 +5,7 @@ An MCP server that provides a tool for sending transactional emails via Mailtrap
 ## Setup
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/railsware/mailtrap-mcp.git
    cd mailtrap-mcp
@@ -24,6 +25,7 @@ Edit the Claude for Desktop configuration file:
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
 Add the following configuration:
+
 ```json
 {
   "mcpServers": {
@@ -32,7 +34,30 @@ Add the following configuration:
       "args": ["/path/to/mailtrap-mcp/dist/index.js"],
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@domain.com",
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+      }
+    }
+  }
+}
+```
+
+If you are using .asdf for managing Node.js you should use absolute path to executable:
+
+```json
+{
+  "mcpServers": {
+    "mailtrap": {
+      "command": "/Users/<username>/.asdf/shims/node",
+      "args": [
+        "/path/to/mailtrap-mcp/dist/index.js"
+      ],
+      "env": {
+        "PATH": "/Users/<username>/.asdf/shims:/usr/bin:/bin",
+        "ASDF_DIR": "/opt/homebrew/opt/asdf/libexec",
+        "ASDF_DATA_DIR": "/Users/<username>/.asdf",
+        "ASDF_NODEJS_VERSION": "20.6.1",
+        "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
       }
     }
   }
@@ -44,7 +69,7 @@ Add the following configuration:
 Once configured, you can ask Claude to send emails, for example:
 
 - "Send an email to john.doe@example.com with the subject 'Meeting Tomorrow' and a friendly reminder about our upcoming meeting."
-- "Email sarah@company.com about the project update, and CC the team at team@company.com"
+- "Email sarah@example.com about the project update, and CC the team at team@example.com"
 
 ## Available Tool
 
@@ -53,6 +78,7 @@ Once configured, you can ask Claude to send emails, for example:
 Sends a transactional email through Mailtrap.
 
 **Parameters:**
+
 - `to` (required): Email address of the recipient
 - `subject` (required): Email subject line
 - `from` (optional): Email address of the sender, if not provided "DEFAULT_FROM_EMAIL" will be used
