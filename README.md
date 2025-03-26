@@ -41,8 +41,9 @@ Add the following configuration:
 }
 ```
 
-If you are using .asdf for managing Node.js you should use absolute path to executable:
+If you are using `asdf` for managing Node.js you should use absolute path to executable:
 
+(example for Mac)
 ```json
 {
   "mcpServers": {
@@ -90,7 +91,7 @@ Sends a transactional email through Mailtrap.
 
 ## Testing
 
-You can test the server using the MCP Inspector:
+You can test the server using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector):
 
 ```bash
 npm run dev
