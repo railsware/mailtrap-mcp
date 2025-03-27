@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const hasDefaultFromEmail = !!process.env.DEFAULT_FROM_EMAIL;
 
-export default {
+const sendEmailSchema = {
   from: hasDefaultFromEmail
     ? z
         .string()
@@ -27,3 +27,5 @@ export default {
     .optional()
     .describe("Optional HTML version of the email body"),
 };
+
+export default sendEmailSchema;
