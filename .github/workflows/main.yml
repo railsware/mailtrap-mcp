@@ -1,4 +1,4 @@
-name: Lint
+name: Build/Lint
 
 on: push
 
@@ -21,8 +21,8 @@ jobs:
           node-version: ${{ steps.versions.outputs.node_version }}
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install dependencies & Build
         run: npm ci
 
-      - name: Run ESLint and TypeScript type checking
-        run: npm run lint
+      - name: Run ESLint
+        run: npm run lint:eslint
