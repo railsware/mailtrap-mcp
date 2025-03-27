@@ -16,9 +16,9 @@ const server = new McpServer({
 
 server.tool(
   "send-email",
-  "Send transactional email",
+  "Send transactional email using Mailtrap",
   sendEmailSchema,
-  sendEmail,
+  sendEmail
 );
 
 async function main() {
