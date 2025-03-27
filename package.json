@@ -15,8 +15,8 @@
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint:tsc": "tsc -p . --noEmit --incremental false",
-    "build": "rm -rf dist && tsc --project tsconfig.build.json",
-    "prepublish": "npm run build && chmod +x dist/index.js",
+    "build": "shx rm -rf dist && tsc --project tsconfig.build.json",
+    "prepublish": "npm run build && shx chmod +x dist/index.js",
     "dev": "npx @modelcontextprotocol/inspector node dist/index.js"
   },
   "keywords": [],
@@ -40,6 +40,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.8.8",
+    "shx": "^0.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   }
