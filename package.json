@@ -17,7 +17,10 @@
     "lint:tsc": "tsc -p . --noEmit --incremental false",
     "build": "shx rm -rf dist && tsc --project tsconfig.build.json",
     "prepublish": "npm run build && shx chmod +x dist/index.js",
-    "dev": "npx @modelcontextprotocol/inspector node dist/index.js"
+    "dev": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "license": "MIT",
@@ -30,6 +33,7 @@
   "types": "dist/index.d.ts",
   "devDependencies": {
     "@modelcontextprotocol/inspector": "^0.6.0",
+    "@types/jest": "^29.5.12",
     "@types/node": "^22.13.13",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
@@ -39,8 +43,10 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^29.7.0",
     "prettier": "^2.8.8",
     "shx": "^0.3.4",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
   }

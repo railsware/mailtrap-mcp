@@ -1,4 +1,4 @@
-name: Build/Lint
+name: Lint/Test/Build
 
 on: push
 
@@ -13,7 +13,7 @@ jobs:
 
       - name: Read Node.JS version
         id: versions
-        run: | 
+        run: |
           version_line=($(grep nodejs .tool-versions))
           echo "node_version=${version_line[1]}" >> $GITHUB_OUTPUT
 
@@ -28,3 +28,6 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint:eslint
+
+      - name: Run Tests
+        run: npm run test
