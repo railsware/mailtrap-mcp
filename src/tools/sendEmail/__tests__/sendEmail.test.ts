@@ -131,6 +131,33 @@ describe("sendEmail", () => {
     });
   });
 
+  it("should handle category parameter", async () => {
+    const category = "test-category";
+
+    const result = await sendEmail({
+      ...mockEmailData,
+      category,
+    });
+
+    expect(client.send).toHaveBeenCalledWith({
+      from: { email: "default@example.com" },
+      to: [{ email: mockEmailData.to }],
+      subject: mockEmailData.subject,
+      text: mockEmailData.text,
+      html: undefined,
+      category,
+    });
+
+    expect(result).toEqual({
+      content: [
+        {
+          type: "text",
+          text: `Email sent successfully to ${mockEmailData.to}.\nMessage IDs: ${mockResponse.message_ids}\nStatus: Success`,
+        },
+      ],
+    });
+  });
+
   describe("errors handling", () => {
     it("should throw error when neither HTML nor TEXT is provided", async () => {
       const result = await sendEmail({
