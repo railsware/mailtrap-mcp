@@ -1,2 +1,4 @@
-export { sendEmail } from "./sendEmail";
-export { sendEmailSchema } from "./schema";
+import sendEmailSchema from "./schema";
+import sendEmail from "./sendEmail";
+
+export { sendEmailSchema, sendEmail };

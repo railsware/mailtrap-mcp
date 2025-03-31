@@ -28,4 +28,4 @@ const sendEmailSchema = {
     .describe("Optional HTML version of the email body"),
 };
 
-export { sendEmailSchema };
+export default sendEmailSchema;

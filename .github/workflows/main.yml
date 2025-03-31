@@ -1,0 +1,30 @@
+name: Build/Lint
+
+on: push
+
+jobs:
+  lint:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Read Node.JS version
+        id: versions
+        run: | 
+          version_line=($(grep nodejs .tool-versions))
+          echo "node_version=${version_line[1]}" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.versions.outputs.node_version }}
+          cache: "npm"
+
+      - name: Install dependencies & Build
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint:eslint
