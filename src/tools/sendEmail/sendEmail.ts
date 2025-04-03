@@ -48,9 +48,6 @@ async function sendEmail({
     if (cc && cc.length > 0) emailData.cc = cc.map((email) => ({ email }));
     if (bcc && bcc.length > 0) emailData.bcc = bcc.map((email) => ({ email }));
 
-    // eslint-disable-next-line no-console
-    console.error("Sending email with params:", emailData);
-
     const response = await client.send(emailData);
 
     return {
@@ -64,7 +61,6 @@ async function sendEmail({
       ],
     };
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error("Error sending email:", error);
 
     const errorMessage = error instanceof Error ? error.message : String(error);
