@@ -1,16 +1,21 @@
 {
   "name": "mcp-mailtrap",
+  "version": "0.0.1",
   "description": "Official MCP Server for Mailtrap",
+  "license": "MIT",
   "author": "Railsware Products Studio LLC",
+  "homepage": "https://mailtrap.io",
+  "bugs": "https://github.com/railsware/mailtrap-mcp/issues",
+  "bin": {
+    "mcp-mailtrap-server": "dist/index.js"
+  },
+  "files": [
+    "dist/**/*"
+  ],
   "engines": {
     "node": ">=16.20.1",
     "yarn": ">=1.22.17"
   },
-  "version": "0.0.1",
-  "files": [
-    "dist/**/*"
-  ],
-  "main": "dist/index.js",
   "scripts": {
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "npx eslint . --ext .js,.ts",
@@ -22,15 +27,12 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "keywords": [],
-  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
     "dotenv": "^16.4.7",
     "mailtrap": "^4.0.0",
     "zod": "^3.24.2"
   },
-  "types": "dist/index.d.ts",
   "devDependencies": {
     "@modelcontextprotocol/inspector": "^0.6.0",
     "@types/jest": "^29.5.12",
