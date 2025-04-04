@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "Railsware Products Studio LLC",
   "homepage": "https://mailtrap.io",
+  "repository": "https://github.com/railsware/mailtrap-mcp",
   "bugs": "https://github.com/railsware/mailtrap-mcp/issues",
   "bin": {
     "mcp-mailtrap-server": "dist/index.js"
