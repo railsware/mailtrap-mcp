@@ -8,13 +8,7 @@ An MCP server that provides a tool for sending transactional emails via Mailtrap
 
 ## Setup
 
-### Claude Desktop
-
-Edit the Claude Desktop configuration file:
-
-**Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+### Claude Desktop or Cursor
 
 Add the following configuration:
 
@@ -53,6 +47,44 @@ If you are using `asdf` for managing Node.js you must use absolute path to execu
   }
 }
 ```
+
+#### Claude Desktop config file location
+
+**Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+#### Cursor config file location
+
+**Mac**: `~/.cursor/mcp.json`
+
+**Windows**: `%USERPROFILE%\.cursor\mcp.json`
+
+### VS Code
+
+Run in Command Palette: `Preferences: Open User Settings (JSON)`
+
+Then, in the settings file, add the following configuration:
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "mailtrap": {
+        "command": "npx",
+        "args": ["-y", "mcp-mailtrap"],
+        "env": {
+          "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+          "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        }
+      }
+    }
+  }
+}
+```
+
+> [!TIP]
+> Don't forget to restart your MCP server after changing the "env" section.
 
 ## Usage
 
@@ -93,13 +125,10 @@ cd mailtrap-mcp
 npm install
 ```
 
-### Configuration with Claude Desktop
+### Configuration with Claude Desktop or Cursor
 
-Edit the Claude Desktop configuration file:
-
-**Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+> [!TIP]
+> See the location of the config file in the [Setup](#setup) section.
 
 Add the following configuration:
 
@@ -135,6 +164,28 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+      }
+    }
+  }
+}
+```
+
+### VS Code
+
+> [!TIP]
+> See the location of the config file in the [Setup](#setup) section.
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "mailtrap": {
+        "command": "node",
+        "args": ["/path/to/mailtrap-mcp/dist/index.js"],
+        "env": {
+          "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+          "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        }
       }
     }
   }
