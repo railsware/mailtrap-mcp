@@ -10,12 +10,6 @@ An MCP server that provides a tool for sending transactional emails via Mailtrap
 
 ### Claude Desktop or Cursor
 
-Edit the Claude Desktop configuration file:
-
-**Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
-
 Add the following configuration:
 
 ```json
@@ -54,7 +48,23 @@ If you are using `asdf` for managing Node.js you must use absolute path to execu
 }
 ```
 
+#### Claude Desktop config file location
+
+**Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+#### Cursor config file location
+
+**Mac**: `~/.cursor/mcp.json`
+
+**Windows**: `%USERPROFILE%\.cursor\mcp.json`
+
 ### VS Code
+
+Run in Command Palette: `Preferences: Open User Settings (JSON)`
+
+Then, in the settings file, add the following configuration:
 
 ```json
 {
@@ -117,11 +127,8 @@ npm install
 
 ### Configuration with Claude Desktop or Cursor
 
-Edit the Claude Desktop configuration file:
-
-**Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+> [!TIP]
+> See the location of the config file in the [Setup](#setup) section.
 
 Add the following configuration:
 
@@ -164,6 +171,9 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
 ```
 
 ### VS Code
+
+> [!TIP]
+> See the location of the config file in the [Setup](#setup) section.
 
 ```json
 {
