@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/railsware-mailtrap-mcp-badge.png)](https://mseep.ai/app/railsware-mailtrap-mcp)
+
 ![TypeScript](https://img.shields.io/npm/types/mailtrap?logo=typescript&logoColor=white&label=%20)
 [![test](https://github.com/railsware/mailtrap-mcp/actions/workflows/main.yml/badge.svg)](https://github.com/railsware/mailtrap-mcp/actions/workflows/main.yml)
 [![NPM](https://shields.io/npm/v/mcp-mailtrap?logo=npm&logoColor=white)](https://www.npmjs.com/package/mcp-mailtrap)
