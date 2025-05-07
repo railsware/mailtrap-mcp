@@ -6,6 +6,10 @@
 
 An MCP server that provides a tool for sending transactional emails via Mailtrap
 
+<a href="https://glama.ai/mcp/servers/@railsware/mailtrap-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@railsware/mailtrap-mcp/badge" alt="Mailtrap Email Sending MCP server" />
+</a>
+
 ## Setup
 
 ### Claude Desktop or Cursor
