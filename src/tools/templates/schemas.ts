@@ -20,4 +20,3 @@ export const updateTemplateSchema = {
 export const deleteTemplateSchema = {
   id: z.number().describe("Template ID"),
 };
-

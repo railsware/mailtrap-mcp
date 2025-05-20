@@ -32,7 +32,9 @@ server.tool(
 
 server.tool("get-email-templates", "Get all email templates", {}, async () => {
   const templates = await getTemplates();
-  return { content: [{ type: "text", text: JSON.stringify(templates, null, 2) }] };
+  return {
+    content: [{ type: "text", text: JSON.stringify(templates, null, 2) }],
+  };
 });
 
 server.tool(
@@ -41,7 +43,9 @@ server.tool(
   createTemplateSchema,
   async (args) => {
     const template = await createTemplate(args as any);
-    return { content: [{ type: "text", text: JSON.stringify(template, null, 2) }] };
+    return {
+      content: [{ type: "text", text: JSON.stringify(template, null, 2) }],
+    };
   }
 );
 
@@ -52,7 +56,9 @@ server.tool(
   async (args) => {
     const { id, ...rest } = args as any;
     const template = await updateTemplate(id, rest as any);
-    return { content: [{ type: "text", text: JSON.stringify(template, null, 2) }] };
+    return {
+      content: [{ type: "text", text: JSON.stringify(template, null, 2) }],
+    };
   }
 );
 

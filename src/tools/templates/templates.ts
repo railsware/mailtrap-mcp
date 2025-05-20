@@ -42,13 +42,16 @@ export async function createTemplate(template: {
   return data;
 }
 
-export async function updateTemplate(id: number, template: {
-  name?: string;
-  subject?: string;
-  category?: string;
-  text?: string;
-  html?: string;
-}) {
+export async function updateTemplate(
+  id: number,
+  template: {
+    name?: string;
+    subject?: string;
+    category?: string;
+    text?: string;
+    html?: string;
+  }
+) {
   const body: any = {};
   if (template.name) body.name = template.name;
   if (template.subject) body.subject = template.subject;
@@ -62,4 +65,3 @@ export async function updateTemplate(id: number, template: {
 export async function deleteTemplate(id: number) {
   await api.delete(`/email_templates/${id}`);
 }
-

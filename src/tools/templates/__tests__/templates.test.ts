@@ -2,12 +2,19 @@ import axios from "axios";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-const apiInstance = { get: jest.fn(), post: jest.fn(), patch: jest.fn(), delete: jest.fn() };
+const apiInstance = {
+  get: jest.fn(),
+  post: jest.fn(),
+  patch: jest.fn(),
+  delete: jest.fn(),
+};
 (mockedAxios.create as jest.Mock).mockReturnValue(apiInstance);
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const templates = require("../templates");
-const { getTemplates, createTemplate, updateTemplate, deleteTemplate } = templates;
+
+const { getTemplates, createTemplate, updateTemplate, deleteTemplate } =
+  templates;
 
 describe("templates tools", () => {
   beforeEach(() => {
@@ -24,14 +31,19 @@ describe("templates tools", () => {
   it("should create template", async () => {
     apiInstance.post.mockResolvedValue({ data: { id: 2 } });
     const res = await createTemplate({ name: "t", subject: "s" });
-    expect(apiInstance.post).toHaveBeenCalledWith("/email_templates", { name: "t", subject: "s" });
+    expect(apiInstance.post).toHaveBeenCalledWith("/email_templates", {
+      name: "t",
+      subject: "s",
+    });
     expect(res).toEqual({ id: 2 });
   });
 
   it("should update template", async () => {
     apiInstance.patch.mockResolvedValue({ data: { id: 3 } });
     const res = await updateTemplate(3, { name: "n" });
-    expect(apiInstance.patch).toHaveBeenCalledWith("/email_templates/3", { name: "n" });
+    expect(apiInstance.patch).toHaveBeenCalledWith("/email_templates/3", {
+      name: "n",
+    });
     expect(res).toEqual({ id: 3 });
   });
 
