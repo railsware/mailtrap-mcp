@@ -20,6 +20,7 @@ Add the following configuration:
       "args": ["-y", "mcp-mailtrap"],
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com"
       }
     }
@@ -41,6 +42,7 @@ If you are using `asdf` for managing Node.js you must use absolute path to execu
         "ASDF_DATA_DIR": "/Users/<username>/.asdf",
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com"
       }
     }
@@ -83,6 +85,7 @@ Then, in the settings file, add the following configuration:
         "args": ["-y", "mcp-mailtrap"],
         "env": {
           "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+          "MAILTRAP_ACCOUNT_ID": "your_account_id",
           "DEFAULT_FROM_EMAIL": "your_sender@example.com"
         }
       }
@@ -148,6 +151,7 @@ Add the following configuration:
       "args": ["/path/to/mailtrap-mcp/dist/index.js"],
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com"
       }
     }
@@ -171,6 +175,7 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "ASDF_DATA_DIR": "/Users/<username>/.asdf",
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com"
       }
     }
@@ -192,6 +197,7 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "args": ["/path/to/mailtrap-mcp/dist/index.js"],
         "env": {
           "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
+          "MAILTRAP_ACCOUNT_ID": "your_account_id",
           "DEFAULT_FROM_EMAIL": "your_sender@example.com"
         }
       }
