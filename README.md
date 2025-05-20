@@ -118,6 +118,50 @@ Sends a transactional email through Mailtrap.
 - `bcc` (optional): Array of BCC recipient email addresses
 - `category` (optional): Email category for tracking
 
+### list-email-templates
+
+Retrieves email templates for a specific account.
+
+**Parameters:**
+
+- `accountId` (required): Mailtrap account identifier
+
+### create-email-template
+
+Creates a new email template.
+
+**Parameters:**
+
+- `accountId` (required): Mailtrap account identifier
+- `name` (required): Template name
+- `subject` (required): Template subject
+- `category` (required): Template category
+- `body_text` (optional): Text version of the template
+- `body_html` (optional): HTML version of the template
+
+### update-email-template
+
+Updates an existing email template.
+
+**Parameters:**
+
+- `accountId` (required): Mailtrap account identifier
+- `emailTemplateId` (required): Template ID
+- `name` (optional): Template name
+- `subject` (optional): Template subject
+- `category` (optional): Template category
+- `body_text` (optional): Text version of the template
+- `body_html` (optional): HTML version of the template
+
+### delete-email-template
+
+Deletes an email template.
+
+**Parameters:**
+
+- `accountId` (required): Mailtrap account identifier
+- `emailTemplateId` (required): Template ID
+
 ## Development
 
 1. Clone the repository:

@@ -6,6 +6,16 @@ import dotenv from "dotenv";
 import CONFIG from "./config";
 
 import { sendEmailSchema, sendEmail } from "./tools/sendEmail";
+import {
+  listEmailTemplatesSchema,
+  createEmailTemplateSchema,
+  updateEmailTemplateSchema,
+  deleteEmailTemplateSchema,
+  listEmailTemplates,
+  createEmailTemplate,
+  updateEmailTemplate,
+  deleteEmailTemplate,
+} from "./tools/templates";
 
 dotenv.config();
 
@@ -19,6 +29,34 @@ server.tool(
   "Send transactional email using Mailtrap",
   sendEmailSchema,
   sendEmail
+);
+
+server.tool(
+  "list-email-templates",
+  "List email templates for an account",
+  listEmailTemplatesSchema,
+  listEmailTemplates
+);
+
+server.tool(
+  "create-email-template",
+  "Create Email Template",
+  createEmailTemplateSchema,
+  createEmailTemplate
+);
+
+server.tool(
+  "update-email-template",
+  "Update Email Template",
+  updateEmailTemplateSchema,
+  updateEmailTemplate
+);
+
+server.tool(
+  "delete-email-template",
+  "Delete Email Template",
+  deleteEmailTemplateSchema,
+  deleteEmailTemplate
 );
 
 async function main() {
