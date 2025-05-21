@@ -94,8 +94,71 @@ Then, in the settings file, add the following configuration:
 }
 ```
 
+
 > [!TIP]
 > Don't forget to restart your MCP server after changing the "env" section.
+
+### Docker
+
+You can run the Mailtrap MCP inside a Docker container. First build the image:
+
+```bash
+docker build -t mailtrap-mcp .
+```
+
+Then start the container, providing the required environment variables:
+
+```bash
+docker run \
+  -e MAILTRAP_API_TOKEN=your_mailtrap_api_token \
+  -e MAILTRAP_ACCOUNT_ID=your_account_id \
+  -e DEFAULT_FROM_EMAIL=your_sender@example.com \
+  mailtrap-mcp
+```
+
+#### Using with Claude Desktop or Cursor
+
+Add the following configuration:
+
+```json
+{
+  "mcpServers": {
+    "mailtrap": {
+      "command": "docker",
+      "args": [
+        "run", "--rm",
+        "-e", "MAILTRAP_API_TOKEN=${MAILTRAP_API_TOKEN}",
+        "-e", "MAILTRAP_ACCOUNT_ID=${MAILTRAP_ACCOUNT_ID}",
+        "-e", "DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}",
+        "mailtrap-mcp"
+      ]
+    }
+  }
+}
+```
+
+#### Using with VS Code
+
+```json
+{
+  "mcp": {
+    "servers": {
+      "mailtrap": {
+        "command": "docker",
+        "args": [
+          "run", "--rm",
+          "-e", "MAILTRAP_API_TOKEN=${MAILTRAP_API_TOKEN}",
+          "-e", "MAILTRAP_ACCOUNT_ID=${MAILTRAP_ACCOUNT_ID}",
+          "-e", "DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}",
+          "mailtrap-mcp"
+        ]
+      }
+    }
+  }
+}
+```
+
+
 
 ## Usage
 
