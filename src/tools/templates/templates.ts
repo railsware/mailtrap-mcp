@@ -1,5 +1,3 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
-
 const { MAILTRAP_API_TOKEN, MAILTRAP_ACCOUNT_ID } = process.env;
 
 if (!MAILTRAP_API_TOKEN) {
@@ -11,13 +9,32 @@ if (!MAILTRAP_ACCOUNT_ID) {
   process.exit(1);
 }
 
-const api: AxiosInstance = axios.create({
-  baseURL: `https://mailtrap.io/api/accounts/${MAILTRAP_ACCOUNT_ID}`,
-  headers: {
-    "Api-Token": MAILTRAP_API_TOKEN,
-    "Content-Type": "application/json",
-  },
-});
+const API_TOKEN = MAILTRAP_API_TOKEN as string;
+const ACCOUNT_ID = MAILTRAP_ACCOUNT_ID as string;
+
+const BASE_URL = `https://mailtrap.io/api/accounts/${ACCOUNT_ID}`;
+
+async function request<T>(path: string, options: RequestInit): Promise<T> {
+  const response = await fetch(`${BASE_URL}${path}`, {
+    ...options,
+    headers: {
+      "Api-Token": API_TOKEN,
+      "Content-Type": "application/json",
+      ...(options.headers ?? {}),
+    },
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(text || response.statusText);
+  }
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return (await response.json()) as T;
+}
 
 export interface EmailTemplate {
   id: number;
@@ -48,29 +65,40 @@ export interface UpdateTemplateRequest {
 
 export async function getTemplates(): Promise<EmailTemplate[]> {
   try {
-    const { data } = await api.get<EmailTemplate[]>("/email_templates");
-    return data;
+    return await request<EmailTemplate[]>("/email_templates", {
+      method: "GET",
+    });
   } catch (err) {
-    const message = (err as AxiosError).message;
+    const message = err instanceof Error ? err.message : String(err);
     throw new Error(`Failed to list templates: ${message}`);
   }
 }
 
-export async function createTemplate(req: CreateTemplateRequest): Promise<EmailTemplate> {
+export async function createTemplate(
+  req: CreateTemplateRequest
+): Promise<EmailTemplate> {
   try {
-    const body: Record<string, unknown> = { name: req.name, subject: req.subject };
+    const body: Record<string, unknown> = {
+      name: req.name,
+      subject: req.subject,
+    };
     if (req.category) body.category = req.category;
     if (req.text) body.body_text = req.text;
     if (req.html) body.body_html = req.html;
-    const { data } = await api.post<EmailTemplate>("/email_templates", body);
-    return data;
+    return await request<EmailTemplate>("/email_templates", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
   } catch (err) {
-    const message = (err as AxiosError).message;
+    const message = err instanceof Error ? err.message : String(err);
     throw new Error(`Failed to create template: ${message}`);
   }
 }
 
-export async function updateTemplate(id: number, req: UpdateTemplateRequest): Promise<EmailTemplate> {
+export async function updateTemplate(
+  id: number,
+  req: UpdateTemplateRequest
+): Promise<EmailTemplate> {
   try {
     const body: Record<string, unknown> = {};
     if (req.name) body.name = req.name;
@@ -78,20 +106,21 @@ export async function updateTemplate(id: number, req: UpdateTemplateRequest): Pr
     if (req.category) body.category = req.category;
     if (req.text) body.body_text = req.text;
     if (req.html) body.body_html = req.html;
-    const { data } = await api.patch<EmailTemplate>(`/email_templates/${id}`, body);
-    return data;
+    return await request<EmailTemplate>(`/email_templates/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    });
   } catch (err) {
-    const message = (err as AxiosError).message;
+    const message = err instanceof Error ? err.message : String(err);
     throw new Error(`Failed to update template: ${message}`);
   }
 }
 
 export async function deleteTemplate(id: number): Promise<void> {
   try {
-    await api.delete(`/email_templates/${id}`);
+    await request(`/email_templates/${id}`, { method: "DELETE" });
   } catch (err) {
-    const message = (err as AxiosError).message;
+    const message = err instanceof Error ? err.message : String(err);
     throw new Error(`Failed to delete template: ${message}`);
   }
 }
-
