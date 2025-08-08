@@ -50,7 +50,8 @@ If you are using `asdf` for managing Node.js you must use absolute path to execu
         "ASDF_DATA_DIR": "/Users/<username>/.asdf",
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+        "MAILTRA_ACCOUNT_ID": "your_account_id"
       }
     }
   }
@@ -102,10 +103,19 @@ Then, in the settings file, add the following configuration:
 
 ## Usage
 
-Once configured, you can ask agent to send emails, for example:
+Once configured, you can ask agent to send emails and manage templates, for example:
+
+**Email Operations:**
 
 - "Send an email to john.doe@example.com with the subject 'Meeting Tomorrow' and a friendly reminder about our upcoming meeting."
 - "Email sarah@example.com about the project update, and CC the team at team@example.com"
+
+**Template Operations:**
+
+- "List all email templates in my Mailtrap account"
+- "Create a new email template called 'Welcome Email' with subject 'Welcome to our platform!'"
+- "Update the template with ID 12345 to change the subject to 'Updated Welcome Message'"
+- "Delete the template with ID 67890"
 
 ## Available Tools
 
@@ -118,11 +128,52 @@ Sends a transactional email through Mailtrap.
 - `to` (required): Email address of the recipient
 - `subject` (required): Email subject line
 - `from` (optional): Email address of the sender, if not provided "DEFAULT_FROM_EMAIL" will be used
-- `text` (optional): Email body text, require if "html" is empty
+- `text` (optional): Email body text, required if "html" is empty
 - `html` (optional): HTML version of the email body, required if "text" is empty
 - `cc` (optional): Array of CC recipient email addresses
 - `bcc` (optional): Array of BCC recipient email addresses
 - `category` (optional): Email category for tracking
+
+### create-template
+
+Creates a new email template in your Mailtrap account.
+
+**Parameters:**
+
+- `name` (required): Name of the template
+- `subject` (required): Email subject line
+- `html` (required): HTML content of the template
+- `text` (optional): Plain text version of the template
+- `category` (optional): Template category (defaults to "General")
+
+### list-templates
+
+Lists all email templates in your Mailtrap account.
+
+**Parameters:**
+
+- No parameters required
+
+### update-template
+
+Updates an existing email template.
+
+**Parameters:**
+
+- `template_id` (required): ID of the template to update
+- `name` (optional): New name for the template
+- `subject` (optional): New email subject line
+- `html` (optional): New HTML content of the template
+- `text` (optional): New plain text version of the template
+- `category` (optional): New category for the template
+
+### delete-template
+
+Deletes an existing email template.
+
+**Parameters:**
+
+- `template_id` (required): ID of the template to delete
 
 ## Development
 
@@ -154,7 +205,8 @@ Add the following configuration:
       "args": ["/path/to/mailtrap-mcp/dist/index.js"],
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id"
       }
     }
   }
@@ -177,7 +229,8 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "ASDF_DATA_DIR": "/Users/<username>/.asdf",
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id"
       }
     }
   }
@@ -198,7 +251,8 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "args": ["/path/to/mailtrap-mcp/dist/index.js"],
         "env": {
           "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-          "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+          "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+          "MAILTRAP_ACCOUNT_ID": "your_account_id"
         }
       }
     }
