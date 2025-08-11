@@ -9,8 +9,8 @@ if (!MAILTRAP_API_TOKEN) {
 
 const client = new MailtrapClient({
   token: MAILTRAP_API_TOKEN,
-  // conditionally set accountId if it's set in the environment variables
-  ...(process.env.MAILTRAP_ACCOUNT_ID
+  // conditionally set accountId if it's a valid number
+  ...(process.env.MAILTRAP_ACCOUNT_ID && !isNaN(Number(process.env.MAILTRAP_ACCOUNT_ID))
     ? { accountId: Number(process.env.MAILTRAP_ACCOUNT_ID) }
     : {}),
 });
