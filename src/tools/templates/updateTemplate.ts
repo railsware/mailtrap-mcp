@@ -10,6 +10,25 @@ async function updateTemplate({
   category,
 }: UpdateTemplateRequest): Promise<{ content: any[]; isError?: boolean }> {
   try {
+    // Validate that at least one update field is provided
+    if (
+      name === undefined &&
+      subject === undefined &&
+      html === undefined &&
+      text === undefined &&
+      category === undefined
+    ) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: "Error: At least one update field (name, subject, html, text, or category) must be provided",
+          },
+        ],
+        isError: true,
+      };
+    }
+
     const updateData: any = {};
     if (name !== undefined) updateData.name = name;
     if (subject !== undefined) updateData.subject = subject;
