@@ -213,6 +213,26 @@ describe("updateTemplate", () => {
     });
   });
 
+  it("should reject update with no fields provided", async () => {
+    const updateDataWithNoFields = {
+      template_id: mockTemplateId,
+    };
+
+    const result = await updateTemplate(updateDataWithNoFields);
+
+    expect(client.templates.update).not.toHaveBeenCalled();
+
+    expect(result).toEqual({
+      content: [
+        {
+          type: "text",
+          text: "Error: At least one update field (name, subject, html, text, or category) must be provided",
+        },
+      ],
+      isError: true,
+    });
+  });
+
   describe("error handling", () => {
     it("should handle client.templates.update failure", async () => {
       const mockError = new Error("Failed to update template");
