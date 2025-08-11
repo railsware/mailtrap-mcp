@@ -51,7 +51,7 @@ If you are using `asdf` for managing Node.js you must use absolute path to execu
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com",
-        "MAILTRA_ACCOUNT_ID": "your_account_id"
+        "MAILTRAP_ACCOUNT_ID": "your_account_id"
       }
     }
   }
