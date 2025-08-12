@@ -167,6 +167,9 @@ Updates an existing email template.
 - `text` (optional): New plain text version of the template
 - `category` (optional): New category for the template
 
+> [!NOTE]
+> At least one updatable field (name, subject, html, text, or category) must be provided when calling update-template to perform an update.
+
 ### delete-template
 
 Deletes an existing email template.
