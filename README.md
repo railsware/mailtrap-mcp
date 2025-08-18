@@ -15,6 +15,12 @@ Before using this MCP server, you need to:
 3. Get your API token from [Mailtrap API settings](https://mailtrap.io/api-tokens)
 4. Get your Account ID from [Mailtrap account management](https://mailtrap.io/account-management)
 
+**Required Environment Variables:**
+- `MAILTRAP_API_TOKEN` - Required for all functionality
+- `DEFAULT_FROM_EMAIL` - Required for all email sending operations
+- `MAILTRAP_ACCOUNT_ID` - Required for template management operations
+- `MAILTRAP_TEST_INBOX_ID` - **Only** required for sandbox email functionality
+
 ## Quick Install
 
 [![Install in Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=mailtrap&config=eyJjb21tYW5kIjoibnB4IC15IG1jcC1tYWlsdHJhcCIsImVudiI6eyJNQUlMVFJBUF9BUElfVE9LRU4iOiJ5b3VyX21haWx0cmFwX2FwaV90b2tlbiIsIkRFRkFVTFRfRlJPTV9FTUFJTCI6InlvdXJfc2VuZGVyQGV4YW1wbGUuY29tIiwiTUFJTFRSQVBfQUNDT1VOVF9JRCI6InlvdXJfYWNjb3VudF9pZCJ9fQ%3D%3D)
@@ -60,7 +66,8 @@ If you are using `asdf` for managing Node.js you must use absolute path to execu
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com",
-        "MAILTRAP_ACCOUNT_ID": "your_account_id"
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
+        "MAILTRAP_TEST_INBOX_ID": "your_test_inbox_id"
       }
     }
   }
@@ -100,7 +107,8 @@ Then, in the settings file, add the following configuration:
         "env": {
           "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
           "DEFAULT_FROM_EMAIL": "your_sender@example.com",
-          "MAILTRAP_ACCOUNT_ID": "your_account_id"
+          "MAILTRAP_ACCOUNT_ID": "your_account_id",
+          "MAILTRAP_TEST_INBOX_ID": "your_test_inbox_id"
         }
       }
     }
@@ -119,6 +127,7 @@ Once configured, you can ask agent to send emails and manage templates, for exam
 
 - "Send an email to john.doe@example.com with the subject 'Meeting Tomorrow' and a friendly reminder about our upcoming meeting."
 - "Email sarah@example.com about the project update, and CC the team at team@example.com"
+- "Send a sandbox email to test@example.com with subject 'Test Template' to preview how our welcome email looks"
 
 **Template Operations:**
 
@@ -143,6 +152,24 @@ Sends a transactional email through Mailtrap.
 - `cc` (optional): Array of CC recipient email addresses
 - `bcc` (optional): Array of BCC recipient email addresses
 - `category` (required): Email category for tracking and analytics
+
+### send-sandbox-email
+
+Sends an email to your Mailtrap test inbox for development and testing purposes. This is perfect for testing email templates without sending emails to real recipients.
+
+**Parameters:**
+
+- `to` (required): Email address of the recipient (will be delivered to your test inbox)
+- `subject` (required): Email subject line
+- `from` (optional): Email address of the sender, if not provided "DEFAULT_FROM_EMAIL" will be used
+- `text` (optional): Email body text, required if "html" is empty
+- `html` (optional): HTML version of the email body, required if "text" is empty
+- `cc` (optional): Array of CC recipient email addresses
+- `bcc` (optional): Array of BCC recipient email addresses
+- `category` (optional): Email category for tracking
+
+> [!NOTE]
+> The `MAILTRAP_TEST_INBOX_ID` environment variable must be configured for sandbox emails to work. This variable is **only** required for sandbox functionality and is not needed for regular transactional emails or template management.
 
 ### create-template
 
