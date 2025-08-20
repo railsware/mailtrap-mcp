@@ -152,8 +152,8 @@ Creates a new email template in your Mailtrap account.
 
 - `name` (required): Name of the template
 - `subject` (required): Email subject line
-- `html` (required): HTML content of the template
-- `text` (optional): Plain text version of the template
+- `html` (or `text` is required): HTML content of the template
+- `text` (or `html` is required): Plain text version of the template
 - `category` (optional): Template category (defaults to "General")
 
 ### list-templates
