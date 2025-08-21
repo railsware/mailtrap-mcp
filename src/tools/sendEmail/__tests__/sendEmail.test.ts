@@ -12,6 +12,7 @@ describe("sendEmail", () => {
     to: "recipient@example.com",
     subject: "Test Subject",
     text: "Test email body",
+    category: "test-category",
   };
 
   const mockResponse = {
@@ -33,7 +34,7 @@ describe("sendEmail", () => {
       subject: mockEmailData.subject,
       text: mockEmailData.text,
       html: undefined,
-      category: undefined,
+      category: mockEmailData.category,
     });
 
     expect(result).toEqual({
@@ -60,7 +61,7 @@ describe("sendEmail", () => {
       subject: mockEmailData.subject,
       text: mockEmailData.text,
       html: undefined,
-      category: undefined,
+      category: mockEmailData.category,
     });
 
     expect(result).toEqual({
@@ -89,7 +90,7 @@ describe("sendEmail", () => {
       subject: mockEmailData.subject,
       text: mockEmailData.text,
       html: undefined,
-      category: undefined,
+      category: mockEmailData.category,
       cc: cc.map((email) => ({ email })),
       bcc: bcc.map((email) => ({ email })),
     });
@@ -118,7 +119,7 @@ describe("sendEmail", () => {
       subject: mockEmailData.subject,
       text: mockEmailData.text,
       html,
-      category: undefined,
+      category: mockEmailData.category,
     });
 
     expect(result).toEqual({
@@ -163,6 +164,7 @@ describe("sendEmail", () => {
       const result = await sendEmail({
         to: mockEmailData.to,
         subject: mockEmailData.subject,
+        category: mockEmailData.category,
       });
 
       expect(client.send).not.toHaveBeenCalled();
