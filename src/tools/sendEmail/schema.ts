@@ -17,10 +17,7 @@ const sendEmailSchema = {
     .array(z.string().email())
     .optional()
     .describe("Optional BCC recipients"),
-  category: z
-    .string()
-    .optional()
-    .describe("Optional email category for tracking"),
+  category: z.string().describe("Email category for tracking"),
   text: z.string().optional().describe("Email body text"),
   html: z
     .string()

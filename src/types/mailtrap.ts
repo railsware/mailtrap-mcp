@@ -6,7 +6,7 @@ export interface SendMailToolRequest {
   html?: string;
   cc?: string[];
   bcc?: string[];
-  category?: string;
+  category: string;
 }
 
 export interface CreateTemplateRequest {
