@@ -142,7 +142,7 @@ Sends a transactional email through Mailtrap.
 - `html` (optional): HTML version of the email body, required if "text" is empty
 - `cc` (optional): Array of CC recipient email addresses
 - `bcc` (optional): Array of BCC recipient email addresses
-- `category` (optional): Email category for tracking
+- `category` (required): Email category for tracking and analytics
 
 ### create-template
 
