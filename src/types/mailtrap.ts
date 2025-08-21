@@ -29,3 +29,14 @@ export interface UpdateTemplateRequest {
 export interface DeleteTemplateRequest {
   template_id: number;
 }
+
+export interface SendSandboxEmailRequest {
+  from?: string;
+  to: string;
+  subject: string;
+  text?: string;
+  html?: string;
+  cc?: string[];
+  bcc?: string[];
+  category?: string;
+}
