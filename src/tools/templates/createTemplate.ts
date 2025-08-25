@@ -9,13 +9,33 @@ async function createTemplate({
   category,
 }: CreateTemplateRequest): Promise<{ content: any[]; isError?: boolean }> {
   try {
-    const template = await client.templates.create({
+    // Validate that at least one of html or text is provided
+    if (!html && !text) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: "Failed to create template: At least one of 'html' or 'text' content must be provided.",
+          },
+        ],
+        isError: true,
+      };
+    }
+
+    const createParams: any = {
       name,
       subject,
       category: category || "General",
-      body_html: html,
-      body_text: text,
-    });
+    };
+
+    if (html) {
+      createParams.body_html = html;
+    }
+    if (text) {
+      createParams.body_text = text;
+    }
+
+    const template = await client.templates.create(createParams);
 
     return {
       content: [
