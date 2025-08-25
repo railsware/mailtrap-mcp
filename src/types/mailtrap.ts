@@ -12,7 +12,7 @@ export interface SendMailToolRequest {
 export interface CreateTemplateRequest {
   name: string;
   subject: string;
-  html: string;
+  html?: string;
   text?: string;
   category?: string;
 }
