@@ -29,6 +29,19 @@ async function updateTemplate({
       };
     }
 
+    // Validate that if both html and text are being updated, at least one has content
+    if (html !== undefined && text !== undefined && !html && !text) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: "Error: If updating both html and text, at least one must have content",
+          },
+        ],
+        isError: true,
+      };
+    }
+
     const updateData: any = {};
     if (name !== undefined) updateData.name = name;
     if (subject !== undefined) updateData.subject = subject;
