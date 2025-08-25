@@ -1,6 +1,6 @@
 {
   "name": "mcp-mailtrap",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Official MCP Server for Mailtrap",
   "license": "MIT",
   "author": "Railsware Products Studio LLC",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
     "dotenv": "^16.4.7",
-    "mailtrap": "^4.0.0",
+    "mailtrap": "^4.2.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {

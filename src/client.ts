@@ -9,6 +9,10 @@ if (!MAILTRAP_API_TOKEN) {
 
 const client = new MailtrapClient({
   token: MAILTRAP_API_TOKEN,
+  // conditionally set accountId if it's a valid number
+  ...(process.env.MAILTRAP_ACCOUNT_ID && !isNaN(Number(process.env.MAILTRAP_ACCOUNT_ID))
+    ? { accountId: Number(process.env.MAILTRAP_ACCOUNT_ID) }
+    : {}),
 });
 
 // eslint-disable-next-line import/prefer-default-export

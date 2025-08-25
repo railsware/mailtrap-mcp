@@ -4,15 +4,23 @@
 
 # MCP Mailtrap Server
 
-An MCP server that provides a tool for sending transactional emails via Mailtrap
+An MCP server that provides tools for sending transactional emails and managing email templates via Mailtrap
+
+## Prerequisites
+
+Before using this MCP server, you need to:
+
+1. [Create a Mailtrap account](https://mailtrap.io/signup)
+2. [Verify your domain](https://mailtrap.io/sending/domains)
+3. Get your API token from [Mailtrap API settings](https://mailtrap.io/api-tokens)
+4. Get your Account ID from [Mailtrap account management](https://mailtrap.io/account-management)
 
 ## Quick Install
 
-[![Install in Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=mailtrap&config=eyJjb21tYW5kIjoibnB4IC15IG1jcC1tYWlsdHJhcCIsImVudiI6eyJNQUlMVFJBUF9BUElfVE9LRU4iOiJ5b3VyX21haWx0cmFwX2FwaV90b2tlbiIsIkRFRkFVTFRfRlJPTV9FTUFJTCI6InlvdXJfc2VuZGVyQGV4YW1wbGUuY29tIn19)
+[![Install in Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=mailtrap&config=eyJjb21tYW5kIjoibnB4IC15IG1jcC1tYWlsdHJhcCIsImVudiI6eyJNQUlMVFJBUF9BUElfVE9LRU4iOiJ5b3VyX21haWx0cmFwX2FwaV90b2tlbiIsIkRFRkFVTFRfRlJPTV9FTUFJTCI6InlvdXJfc2VuZGVyQGV4YW1wbGUuY29tIiwiTUFJTFRSQVBfQUNDT1VOVF9JRCI6InlvdXJfYWNjb3VudF9pZCJ9fQ%3D%3D)
 
-[![Install with Node in VS Code](https://img.shields.io/badge/VS_Code-Node-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=mailtrap-email&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-mailtrap%22%5D%2C%22env%22%3A%7B%22MAILTRAP_API_TOKEN%22%3A%22%24%7Binput%3AmailtrapApiToken%7D%22%2C%22DEFAULT_FROM_EMAIL%22%3A%22%24%7Binput%3AsenderEmail%7D%22%7D%7D&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22mailtrapApiToken%22%2C%22description%22%3A%22Mailtrap+API+Token%22%2C%22password%22%3Atrue%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22senderEmail%22%2C%22description%22%3A%22Sender+Email+Address%22%7D%5D)
+[![Install with Node in VS Code](https://img.shields.io/badge/VS_Code-Node-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=mailtrap&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-mailtrap%22%5D%2C%22env%22%3A%7B%22MAILTRAP_API_TOKEN%22%3A%22%24%7Binput%3AmailtrapApiToken%7D%22%2C%22DEFAULT_FROM_EMAIL%22%3A%22%24%7Binput%3AsenderEmail%7D%22%2C%22MAILTRAP_ACCOUNT_ID%22%3A%22%24%7Binput%3AmailtrapAccountId%7D%22%7D%7D&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22mailtrapApiToken%22%2C%22description%22%3A%22Mailtrap+API+Token%22%2C%22password%22%3Atrue%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22senderEmail%22%2C%22description%22%3A%22Sender+Email+Address%22%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22mailtrapAccountId%22%2C%22description%22%3A%22Mailtrap+Account+ID%22%7D%5D)
 
-[![Install with Node in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Node-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=mailtrap-email&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-mailtrap%22%5D%2C%22env%22%3A%7B%22MAILTRAP_API_TOKEN%22%3A%22%24%7Binput%3AmailtrapApiToken%7D%22%2C%22DEFAULT_FROM_EMAIL%22%3A%22%24%7Binput%3AsenderEmail%7D%22%7D%7D&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22mailtrapApiToken%22%2C%22description%22%3A%22Mailtrap+API+Token%22%2C%22password%22%3Atrue%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22senderEmail%22%2C%22description%22%3A%22Sender+Email+Address%22%7D%5D&quality=insiders)
 
 
 ## Setup
@@ -29,7 +37,8 @@ Add the following configuration:
       "args": ["-y", "mcp-mailtrap"],
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id"
       }
     }
   }
@@ -50,7 +59,8 @@ If you are using `asdf` for managing Node.js you must use absolute path to execu
         "ASDF_DATA_DIR": "/Users/<username>/.asdf",
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id"
       }
     }
   }
@@ -89,7 +99,8 @@ Then, in the settings file, add the following configuration:
         "args": ["-y", "mcp-mailtrap"],
         "env": {
           "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-          "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+          "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+          "MAILTRAP_ACCOUNT_ID": "your_account_id"
         }
       }
     }
@@ -102,10 +113,19 @@ Then, in the settings file, add the following configuration:
 
 ## Usage
 
-Once configured, you can ask agent to send emails, for example:
+Once configured, you can ask agent to send emails and manage templates, for example:
+
+**Email Operations:**
 
 - "Send an email to john.doe@example.com with the subject 'Meeting Tomorrow' and a friendly reminder about our upcoming meeting."
 - "Email sarah@example.com about the project update, and CC the team at team@example.com"
+
+**Template Operations:**
+
+- "List all email templates in my Mailtrap account"
+- "Create a new email template called 'Welcome Email' with subject 'Welcome to our platform!'"
+- "Update the template with ID 12345 to change the subject to 'Updated Welcome Message'"
+- "Delete the template with ID 67890"
 
 ## Available Tools
 
@@ -118,11 +138,55 @@ Sends a transactional email through Mailtrap.
 - `to` (required): Email address of the recipient
 - `subject` (required): Email subject line
 - `from` (optional): Email address of the sender, if not provided "DEFAULT_FROM_EMAIL" will be used
-- `text` (optional): Email body text, require if "html" is empty
+- `text` (optional): Email body text, required if "html" is empty
 - `html` (optional): HTML version of the email body, required if "text" is empty
 - `cc` (optional): Array of CC recipient email addresses
 - `bcc` (optional): Array of BCC recipient email addresses
-- `category` (optional): Email category for tracking
+- `category` (required): Email category for tracking and analytics
+
+### create-template
+
+Creates a new email template in your Mailtrap account.
+
+**Parameters:**
+
+- `name` (required): Name of the template
+- `subject` (required): Email subject line
+- `html` (or `text` is required): HTML content of the template
+- `text` (or `html` is required): Plain text version of the template
+- `category` (optional): Template category (defaults to "General")
+
+### list-templates
+
+Lists all email templates in your Mailtrap account.
+
+**Parameters:**
+
+- No parameters required
+
+### update-template
+
+Updates an existing email template.
+
+**Parameters:**
+
+- `template_id` (required): ID of the template to update
+- `name` (optional): New name for the template
+- `subject` (optional): New email subject line
+- `html` (optional): New HTML content of the template
+- `text` (optional): New plain text version of the template
+- `category` (optional): New category for the template
+
+> [!NOTE]
+> At least one updatable field (name, subject, html, text, or category) must be provided when calling update-template to perform an update.
+
+### delete-template
+
+Deletes an existing email template.
+
+**Parameters:**
+
+- `template_id` (required): ID of the template to delete
 
 ## Development
 
@@ -154,7 +218,8 @@ Add the following configuration:
       "args": ["/path/to/mailtrap-mcp/dist/index.js"],
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id"
       }
     }
   }
@@ -177,7 +242,8 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "ASDF_DATA_DIR": "/Users/<username>/.asdf",
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-        "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+        "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+        "MAILTRAP_ACCOUNT_ID": "your_account_id"
       }
     }
   }
@@ -198,7 +264,8 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "args": ["/path/to/mailtrap-mcp/dist/index.js"],
         "env": {
           "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
-          "DEFAULT_FROM_EMAIL": "your_sender@example.com"
+          "DEFAULT_FROM_EMAIL": "your_sender@example.com",
+          "MAILTRAP_ACCOUNT_ID": "your_account_id"
         }
       }
     }
