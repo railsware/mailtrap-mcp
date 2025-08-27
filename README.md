@@ -44,7 +44,8 @@ Add the following configuration:
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com",
-        "MAILTRAP_ACCOUNT_ID": "your_account_id"
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
+        "MAILTRAP_TEST_INBOX_ID": "your_test_inbox_id"
       }
     }
   }
@@ -246,7 +247,8 @@ Add the following configuration:
       "env": {
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com",
-        "MAILTRAP_ACCOUNT_ID": "your_account_id"
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
+        "MAILTRAP_TEST_INBOX_ID": "your_test_inbox_id"
       }
     }
   }
@@ -270,7 +272,8 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "ASDF_NODEJS_VERSION": "20.6.1",
         "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
         "DEFAULT_FROM_EMAIL": "your_sender@example.com",
-        "MAILTRAP_ACCOUNT_ID": "your_account_id"
+        "MAILTRAP_ACCOUNT_ID": "your_account_id",
+        "MAILTRAP_TEST_INBOX_ID": "your_test_inbox_id"
       }
     }
   }
@@ -292,7 +295,8 @@ If you are using `asdf` for managing Node.js you should use absolute path to exe
         "env": {
           "MAILTRAP_API_TOKEN": "your_mailtrap_api_token",
           "DEFAULT_FROM_EMAIL": "your_sender@example.com",
-          "MAILTRAP_ACCOUNT_ID": "your_account_id"
+          "MAILTRAP_ACCOUNT_ID": "your_account_id",
+          "MAILTRAP_TEST_INBOX_ID": "your_test_inbox_id"
         }
       }
     }
