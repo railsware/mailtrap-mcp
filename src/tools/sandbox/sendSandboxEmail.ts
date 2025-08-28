@@ -46,13 +46,14 @@ async function sendSandboxEmail({
       email: fromEmail,
     };
 
-    const toAddress: Address = {
-      email: to,
-    };
+    // Handle both single email and array of emails
+    const toAddresses: Address[] = Array.isArray(to)
+      ? to.map((email) => ({ email }))
+      : [{ email: to }];
 
     const emailData: Mail = {
       from: fromAddress,
-      to: [toAddress],
+      to: toAddresses,
       subject,
       text,
       html,
@@ -68,9 +69,11 @@ async function sendSandboxEmail({
       content: [
         {
           type: "text",
-          text: `Sandbox email sent successfully to ${to}.\nMessage IDs: ${response.message_ids.join(
-            ", "
-          )}\nStatus: ${response.success ? "Success" : "Failed"}`,
+          text: `Sandbox email sent successfully to ${
+            Array.isArray(to) ? to.join(", ") : to
+          }.\nMessage IDs: ${response.message_ids.join(", ")}\nStatus: ${
+            response.success ? "Success" : "Failed"
+          }`,
         },
       ],
     };
