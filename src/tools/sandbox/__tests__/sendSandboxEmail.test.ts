@@ -186,6 +186,104 @@ describe("sendSandboxEmail", () => {
     });
   });
 
+  it("should handle array of email addresses for 'to' property", async () => {
+    const toEmails = [
+      "user1@example.com",
+      "user2@example.com",
+      "user3@example.com",
+    ];
+
+    const result = await sendSandboxEmail({
+      ...mockEmailData,
+      to: toEmails,
+    });
+
+    expect((sandboxClient as any).send).toHaveBeenCalledWith({
+      from: { email: "default@example.com" },
+      to: toEmails.map((email) => ({ email })),
+      subject: mockEmailData.subject,
+      text: mockEmailData.text,
+      html: undefined,
+      category: undefined,
+    });
+
+    expect(result).toEqual({
+      content: [
+        {
+          type: "text",
+          text: `Sandbox email sent successfully to ${toEmails.join(
+            ", "
+          )}.\nMessage IDs: ${mockResponse.message_ids.join(
+            ", "
+          )}\nStatus: Success`,
+        },
+      ],
+    });
+  });
+
+  it("should handle single email string for 'to' property", async () => {
+    const singleEmail = "single@example.com";
+
+    const result = await sendSandboxEmail({
+      ...mockEmailData,
+      to: singleEmail,
+    });
+
+    expect((sandboxClient as any).send).toHaveBeenCalledWith({
+      from: { email: "default@example.com" },
+      to: [{ email: singleEmail }],
+      subject: mockEmailData.subject,
+      text: mockEmailData.text,
+      html: undefined,
+      category: undefined,
+    });
+
+    expect(result).toEqual({
+      content: [
+        {
+          type: "text",
+          text: `Sandbox email sent successfully to ${singleEmail}.\nMessage IDs: ${mockResponse.message_ids.join(
+            ", "
+          )}\nStatus: Success`,
+        },
+      ],
+    });
+  });
+
+  it("should handle multiple recipients in 'to' field", async () => {
+    const multipleRecipients = [
+      "recipient1@example.com",
+      "recipient2@example.com",
+    ];
+
+    const result = await sendSandboxEmail({
+      ...mockEmailData,
+      to: multipleRecipients,
+    });
+
+    expect((sandboxClient as any).send).toHaveBeenCalledWith({
+      from: { email: "default@example.com" },
+      to: multipleRecipients.map((email) => ({ email })),
+      subject: mockEmailData.subject,
+      text: mockEmailData.text,
+      html: undefined,
+      category: undefined,
+    });
+
+    expect(result).toEqual({
+      content: [
+        {
+          type: "text",
+          text: `Sandbox email sent successfully to ${multipleRecipients.join(
+            ", "
+          )}.\nMessage IDs: ${mockResponse.message_ids.join(
+            ", "
+          )}\nStatus: Success`,
+        },
+      ],
+    });
+  });
+
   describe("errors handling", () => {
     it("should throw error when MAILTRAP_TEST_INBOX_ID is not set", async () => {
       delete process.env.MAILTRAP_TEST_INBOX_ID;
