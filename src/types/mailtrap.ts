@@ -1,6 +1,6 @@
 export interface SendMailToolRequest {
   from?: string;
-  to: string;
+  to: string | string[];
   subject: string;
   text?: string;
   html?: string;
@@ -32,7 +32,7 @@ export interface DeleteTemplateRequest {
 
 export interface SendSandboxEmailRequest {
   from?: string;
-  to: string;
+  to: string | string[];
   subject: string;
   text?: string;
   html?: string;
