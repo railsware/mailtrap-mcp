@@ -145,7 +145,7 @@ Sends a transactional email through Mailtrap.
 
 **Parameters:**
 
-- `to` (required): Email address of the recipient
+- `to` (required): Email address(es) of the recipient(s) - can be a single email or array of emails
 - `subject` (required): Email subject line
 - `from` (optional): Email address of the sender, if not provided "DEFAULT_FROM_EMAIL" will be used
 - `text` (optional): Email body text, required if "html" is empty
@@ -160,7 +160,7 @@ Sends an email to your Mailtrap test inbox for development and testing purposes.
 
 **Parameters:**
 
-- `to` (required): Email address of the recipient (will be delivered to your test inbox)
+- `to` (required): Email address(es) of the recipient(s) - can be a single email or array of emails (will be delivered to your test inbox)
 - `subject` (required): Email subject line
 - `from` (optional): Email address of the sender, if not provided "DEFAULT_FROM_EMAIL" will be used
 - `text` (optional): Email body text, required if "html" is empty
