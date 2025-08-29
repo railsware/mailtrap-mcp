@@ -37,6 +37,16 @@ async function sendEmail({
       ? to.map((email) => ({ email }))
       : [{ email: to }];
 
+    // Validate that we have at least one recipient
+    if (toAddresses.length === 0) {
+      throw new Error("No recipients provided in 'to' field");
+    }
+
+    // Check that each email address is a non-empty string
+    if (toAddresses.some((addr) => !addr.email || addr.email.trim() === "")) {
+      throw new Error("Invalid email address(es) in 'to' field");
+    }
+
     const emailData: Mail = {
       from: fromAddress,
       to: toAddresses,
