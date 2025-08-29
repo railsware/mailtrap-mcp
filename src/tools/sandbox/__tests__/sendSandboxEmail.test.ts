@@ -20,17 +20,17 @@ describe("sendSandboxEmail", () => {
     success: true,
   };
 
-  const originalEnv = process.env;
+  const originalEnv = { ...process.env };
 
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.resetModules();
     (sandboxClient as any).send.mockResolvedValue(mockResponse);
-    process.env = { ...originalEnv };
-    process.env.MAILTRAP_TEST_INBOX_ID = "123";
+    Object.assign(process.env, { MAILTRAP_TEST_INBOX_ID: "123" });
   });
 
   afterEach(() => {
-    process.env = originalEnv;
+    Object.assign(process.env, originalEnv);
   });
 
   it("should send sandbox email successfully with default from address", async () => {
