@@ -11,7 +11,10 @@ const sendEmailSchema = {
         .describe("Email address of the sender (optional with default)")
     : z.string().email().describe("Email address of the sender"),
   to: z
-    .union([z.string().email(), z.array(z.string().email())])
+    .union([
+      z.string().email().describe("Single email address"),
+      z.array(z.string().email()).describe("Array of email addresses"),
+    ])
     .describe(
       "Email address(es) of the recipient(s) - can be a single email or array of emails"
     ),
