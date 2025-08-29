@@ -27,7 +27,8 @@ async function sendSandboxEmail({
       throw new Error("Either HTML or TEXT body is required");
     }
 
-    const fromEmail = from ?? DEFAULT_FROM_EMAIL;
+    // Use provided 'from' email or fall back to DEFAULT_FROM_EMAIL
+    const fromEmail = from || DEFAULT_FROM_EMAIL;
 
     if (!fromEmail) {
       throw new Error(
