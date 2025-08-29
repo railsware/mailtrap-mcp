@@ -186,12 +186,8 @@ describe("sendSandboxEmail", () => {
     });
   });
 
-  it("should handle array of email addresses for 'to' property", async () => {
-    const toEmails = [
-      "user1@example.com",
-      "user2@example.com",
-      "user3@example.com",
-    ];
+  it("should handle comma-separated email addresses for 'to' property", async () => {
+    const toEmails = "user1@example.com, user2@example.com, user3@example.com";
 
     const result = await sendSandboxEmail({
       ...mockEmailData,
@@ -200,7 +196,11 @@ describe("sendSandboxEmail", () => {
 
     expect((sandboxClient as any).send).toHaveBeenCalledWith({
       from: { email: "default@example.com" },
-      to: toEmails.map((email) => ({ email })),
+      to: [
+        { email: "user1@example.com" },
+        { email: "user2@example.com" },
+        { email: "user3@example.com" }
+      ],
       subject: mockEmailData.subject,
       text: mockEmailData.text,
       html: undefined,
@@ -211,9 +211,7 @@ describe("sendSandboxEmail", () => {
       content: [
         {
           type: "text",
-          text: `Sandbox email sent successfully to ${toEmails.join(
-            ", "
-          )}.\nMessage IDs: ${mockResponse.message_ids.join(
+          text: `Sandbox email sent successfully to user1@example.com, user2@example.com, user3@example.com.\nMessage IDs: ${mockResponse.message_ids.join(
             ", "
           )}\nStatus: Success`,
         },
