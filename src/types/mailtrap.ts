@@ -32,7 +32,7 @@ export interface DeleteTemplateRequest {
 
 export interface SendSandboxEmailRequest {
   from?: string;
-  to: string | string[];
+  to: string;
   subject: string;
   text?: string;
   html?: string;
