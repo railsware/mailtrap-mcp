@@ -10,10 +10,7 @@ const sendSandboxEmailSchema = {
         .optional()
         .describe("Email address of the sender (optional with default)")
     : z.string().email().describe("Email address of the sender"),
-  to: z
-    .string()
-    .min(1)
-    .describe("Email addresses (comma-separated or single)"),
+  to: z.string().min(1).describe("Email addresses (comma-separated or single)"),
   subject: z.string().describe("Email subject line"),
   cc: z.array(z.string().email()).optional().describe("Optional CC recipients"),
   bcc: z
