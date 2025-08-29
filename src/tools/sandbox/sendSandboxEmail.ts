@@ -92,9 +92,7 @@ async function sendSandboxEmail({
           type: "text",
           text: `Sandbox email sent successfully to ${toEmails.join(
             ", "
-          )}.\nMessage IDs: ${response.message_ids.join(
-            ", "
-          )}\nStatus: ${
+          )}.\nMessage IDs: ${response.message_ids.join(", ")}\nStatus: ${
             response.success ? "Success" : "Failed"
           }`,
         },
