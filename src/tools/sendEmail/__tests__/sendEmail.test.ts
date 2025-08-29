@@ -239,6 +239,60 @@ describe("sendEmail", () => {
       });
     });
 
+    it("should throw error when empty array is provided for 'to' field", async () => {
+      const result = await sendEmail({
+        ...mockEmailData,
+        to: [],
+      });
+
+      expect(client.send).not.toHaveBeenCalled();
+      expect(result).toEqual({
+        content: [
+          {
+            type: "text",
+            text: "Failed to send email: No recipients provided in 'to' field",
+          },
+        ],
+        isError: true,
+      });
+    });
+
+    it("should throw error when empty string is provided for 'to' field", async () => {
+      const result = await sendEmail({
+        ...mockEmailData,
+        to: "",
+      });
+
+      expect(client.send).not.toHaveBeenCalled();
+      expect(result).toEqual({
+        content: [
+          {
+            type: "text",
+            text: "Failed to send email: Invalid email address(es) in 'to' field",
+          },
+        ],
+        isError: true,
+      });
+    });
+
+    it("should throw error when array contains empty email addresses", async () => {
+      const result = await sendEmail({
+        ...mockEmailData,
+        to: ["valid@example.com", "", "another@example.com"],
+      });
+
+      expect(client.send).not.toHaveBeenCalled();
+      expect(result).toEqual({
+        content: [
+          {
+            type: "text",
+            text: "Failed to send email: Invalid email address(es) in 'to' field",
+          },
+        ],
+        isError: true,
+      });
+    });
+
     it("should handle client.send failure", async () => {
       const mockError = new Error("Failed to send email");
       (client.send as jest.Mock).mockRejectedValue(mockError);
