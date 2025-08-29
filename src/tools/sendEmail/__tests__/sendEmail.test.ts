@@ -250,7 +250,7 @@ describe("sendEmail", () => {
         content: [
           {
             type: "text",
-            text: "Failed to send email: No recipients provided in 'to' field",
+            text: "Failed to send email: No valid recipients provided in 'to' field after normalization",
           },
         ],
         isError: true,
@@ -268,28 +268,34 @@ describe("sendEmail", () => {
         content: [
           {
             type: "text",
-            text: "Failed to send email: Invalid email address(es) in 'to' field",
+            text: "Failed to send email: No valid recipients provided in 'to' field after normalization",
           },
         ],
         isError: true,
       });
     });
 
-    it("should throw error when array contains empty email addresses", async () => {
+    it("should filter out empty email addresses and send to valid ones", async () => {
       const result = await sendEmail({
         ...mockEmailData,
         to: ["valid@example.com", "", "another@example.com"],
       });
 
-      expect(client.send).not.toHaveBeenCalled();
+      expect(client.send).toHaveBeenCalledWith(
+        expect.objectContaining({
+          to: [
+            { email: "valid@example.com" },
+            { email: "another@example.com" },
+          ],
+        })
+      );
       expect(result).toEqual({
         content: [
           {
             type: "text",
-            text: "Failed to send email: Invalid email address(es) in 'to' field",
+            text: "Email sent successfully to valid@example.com, another@example.com.\nMessage IDs: 123\nStatus: Success",
           },
         ],
-        isError: true,
       });
     });
 
