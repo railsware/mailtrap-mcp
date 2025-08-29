@@ -46,10 +46,22 @@ async function sendSandboxEmail({
       email: fromEmail,
     };
 
-    // Handle both single email and array of emails
-    const toAddresses: Address[] = Array.isArray(to)
-      ? to.map((email) => ({ email }))
-      : [{ email: to }];
+    // Parse and validate email addresses from the 'to' string
+    const toEmails = to
+      .split(",")
+      .map((email) => email.trim())
+      .filter((email) => email.length > 0)
+      .filter((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+
+    if (toEmails.length === 0) {
+      throw new Error("No valid email addresses provided in 'to' field");
+    }
+
+    // Debug logging
+    console.log("Original 'to' input:", to);
+    console.log("Parsed toEmails array:", toEmails);
+    const toAddresses: Address[] = toEmails.map((email) => ({ email }));
+    console.log("Final toAddresses:", toAddresses);
 
     const emailData: Mail = {
       from: fromAddress,
@@ -63,15 +75,26 @@ async function sendSandboxEmail({
     if (cc && cc.length > 0) emailData.cc = cc.map((email) => ({ email }));
     if (bcc && bcc.length > 0) emailData.bcc = bcc.map((email) => ({ email }));
 
+    // Debug logging to see what we're sending
+    console.log(
+      "Sending email data to Mailtrap API:",
+      JSON.stringify(emailData, null, 2)
+    );
+
     const response = await sandboxClient.send(emailData);
+
+    // Debug logging to see what response we get
+    console.log("Mailtrap API response:", JSON.stringify(response, null, 2));
 
     return {
       content: [
         {
           type: "text",
-          text: `Sandbox email sent successfully to ${
-            Array.isArray(to) ? to.join(", ") : to
-          }.\nMessage IDs: ${response.message_ids.join(", ")}\nStatus: ${
+          text: `Sandbox email sent successfully to ${toEmails.join(
+            ", "
+          )}.\nMessage IDs: ${response.message_ids.join(
+            ", "
+          )}\nStatus: ${
             response.success ? "Success" : "Failed"
           }`,
         },
