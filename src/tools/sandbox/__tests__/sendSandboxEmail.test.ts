@@ -9,6 +9,7 @@ jest.mock("../../../client", () => ({
 
 describe("sendSandboxEmail", () => {
   const mockEmailData = {
+    from: "default@example.com",
     to: "recipient@example.com",
     subject: "Test Subject",
     text: "Test email body",
@@ -300,6 +301,7 @@ describe("sendSandboxEmail", () => {
 
     it("should throw error when neither HTML nor TEXT is provided", async () => {
       const result = await sendSandboxEmail({
+        from: "default@example.com",
         to: mockEmailData.to,
         subject: mockEmailData.subject,
       });
