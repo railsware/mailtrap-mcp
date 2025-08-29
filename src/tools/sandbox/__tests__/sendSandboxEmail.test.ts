@@ -199,7 +199,7 @@ describe("sendSandboxEmail", () => {
       to: [
         { email: "user1@example.com" },
         { email: "user2@example.com" },
-        { email: "user3@example.com" }
+        { email: "user3@example.com" },
       ],
       subject: mockEmailData.subject,
       text: mockEmailData.text,
@@ -249,10 +249,7 @@ describe("sendSandboxEmail", () => {
   });
 
   it("should handle multiple recipients in 'to' field", async () => {
-    const multipleRecipients = [
-      "recipient1@example.com",
-      "recipient2@example.com",
-    ];
+    const multipleRecipients = "recipient1@example.com, recipient2@example.com";
 
     const result = await sendSandboxEmail({
       ...mockEmailData,
@@ -261,7 +258,10 @@ describe("sendSandboxEmail", () => {
 
     expect((sandboxClient as any).send).toHaveBeenCalledWith({
       from: { email: "default@example.com" },
-      to: multipleRecipients.map((email) => ({ email })),
+      to: [
+        { email: "recipient1@example.com" },
+        { email: "recipient2@example.com" },
+      ],
       subject: mockEmailData.subject,
       text: mockEmailData.text,
       html: undefined,
@@ -272,9 +272,7 @@ describe("sendSandboxEmail", () => {
       content: [
         {
           type: "text",
-          text: `Sandbox email sent successfully to ${multipleRecipients.join(
-            ", "
-          )}.\nMessage IDs: ${mockResponse.message_ids.join(
+          text: `Sandbox email sent successfully to recipient1@example.com, recipient2@example.com.\nMessage IDs: ${mockResponse.message_ids.join(
             ", "
           )}\nStatus: Success`,
         },
