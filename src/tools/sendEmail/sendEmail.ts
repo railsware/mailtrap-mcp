@@ -55,9 +55,9 @@ async function sendEmail({
       content: [
         {
           type: "text",
-          text: `Email sent successfully to ${
-            Array.isArray(to) ? to.join(", ") : to
-          }.\nMessage IDs: ${response.message_ids}\nStatus: ${
+          text: `Email sent successfully to ${toAddresses
+            .map((addr) => addr.email)
+            .join(", ")}.\nMessage IDs: ${response.message_ids}\nStatus: ${
             response.success ? "Success" : "Failed"
           }`,
         },
