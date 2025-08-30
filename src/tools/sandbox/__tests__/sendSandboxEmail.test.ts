@@ -156,6 +156,38 @@ describe("sendSandboxEmail", () => {
     });
   });
 
+  it("should handle HTML-only content with text explicitly undefined", async () => {
+    const html = "<p>Test HTML-only content</p>";
+
+    const result = await sendSandboxEmail({
+      ...mockEmailData,
+      text: undefined,
+      html,
+    });
+
+    expect((sandboxClient as any).send).toHaveBeenCalledWith({
+      from: { email: "default@example.com" },
+      to: [{ email: mockEmailData.to }],
+      subject: mockEmailData.subject,
+      text: undefined,
+      html,
+      category: undefined,
+    });
+
+    expect(result).toEqual({
+      content: [
+        {
+          type: "text",
+          text: `Sandbox email sent successfully to ${
+            mockEmailData.to
+          }.\nMessage IDs: ${mockResponse.message_ids.join(
+            ", "
+          )}\nStatus: Success`,
+        },
+      ],
+    });
+  });
+
   it("should handle category parameter", async () => {
     const category = "test-category";
 
