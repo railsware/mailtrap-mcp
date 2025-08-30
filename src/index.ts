@@ -16,6 +16,7 @@ import {
   updateTemplate,
   updateTemplateSchema,
 } from "./tools/templates";
+import { sendSandboxEmail, sendSandboxEmailSchema } from "./tools/sandbox";
 
 dotenv.config();
 
@@ -60,6 +61,16 @@ server.tool(
   "Delete an existing email template",
   deleteTemplateSchema,
   deleteTemplate
+);
+
+/**
+ * Sandbox operations.
+ */
+server.tool(
+  "send-sandbox-email",
+  "Send email in sandbox mode to a test inbox",
+  sendSandboxEmailSchema,
+  sendSandboxEmail
 );
 
 async function main() {
