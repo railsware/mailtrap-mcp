@@ -8,10 +8,36 @@
   "repository": "https://github.com/railsware/mailtrap-mcp",
   "bugs": "https://github.com/railsware/mailtrap-mcp/issues",
   "bin": {
-    "mcp-mailtrap-server": "dist/index.js"
+    "mcp-mailtrap-server": "dist/index.js",
+    "mailtrap-dxt": "dist/dxt.js"
+  },
+  "dxt": {
+    "name": "Mailtrap",
+    "description": "Send emails and manage templates using Mailtrap",
+    "version": "0.0.3",
+    "author": "Railsware Products Studio LLC",
+    "homepage": "https://mailtrap.io",
+    "repository": "https://github.com/railsware/mailtrap-mcp",
+    "main": "dist/dxt.js",
+    "capabilities": [
+      "mcp"
+    ],
+    "mcpServers": {
+      "mailtrap": {
+        "command": "node",
+        "args": [
+          "dist/index.js"
+        ],
+        "env": {
+          "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}"
+        }
+      }
+    }
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "dxt.json",
+    ".dxt"
   ],
   "engines": {
     "node": ">=16.20.1",
@@ -22,7 +48,7 @@
     "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint:tsc": "tsc -p . --noEmit --incremental false",
     "build": "shx rm -rf dist && tsc --project tsconfig.build.json",
-    "prepublish": "npm run build && shx chmod +x dist/index.js",
+    "prepublish": "npm run build && shx chmod +x dist/index.js dist/dxt.js",
     "dev": "npx @modelcontextprotocol/inspector node dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
