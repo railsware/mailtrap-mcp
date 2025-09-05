@@ -52,7 +52,10 @@
     "dev": "npx @modelcontextprotocol/inspector node dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "dxt:build": "bin/build-dxt",
+    "dxt:sign": "npx @anthropic-ai/dxt sign mailtrap-mcp.dxt",
+    "dxt:info": "npx @anthropic-ai/dxt info mailtrap-mcp.dxt"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
@@ -61,6 +64,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@anthropic-ai/dxt": "^0.2.6",
     "@modelcontextprotocol/inspector": "^0.14.1",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.13.13",
