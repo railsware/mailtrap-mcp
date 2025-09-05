@@ -1,0 +1,31 @@
+{
+  "dxt_version": "0.1",
+  "name": "Mailtrap",
+  "version": "0.0.3",
+  "description": "Send emails and manage templates using Mailtrap",
+  "author": {
+    "name": "Railsware Products Studio LLC"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/dxt.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/dxt.js"
+      ],
+      "env": {
+        "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}",
+        "DEFAULT_FROM_EMAIL": "${env:DEFAULT_FROM_EMAIL}",
+        "MAILTRAP_ACCOUNT_ID": "${env:MAILTRAP_ACCOUNT_ID}",
+        "MAILTRAP_TEST_INBOX_ID": "${env:MAILTRAP_TEST_INBOX_ID}"
+      }
+    }
+  },
+  "license": "MIT",
+  "homepage": "https://mailtrap.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/railsware/mailtrap-mcp"
+  }
+}
