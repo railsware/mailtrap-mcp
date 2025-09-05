@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Build DXT file for Claude Desktop extension
+# This script creates a .dxt file that can be installed in Claude Desktop
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}Building DXT file for mailtrap-mcp...${NC}"
+
+# Ensure we have the latest build
+echo -e "${YELLOW}Building TypeScript...${NC}"
+npm run build
+
+# Create build directory for DXT
+BUILD_DIR="dxt-build"
+OUTPUT_FILE="mailtrap-mcp.dxt"
+
+# Clean up previous build
+rm -rf "$BUILD_DIR"
+rm -f "$OUTPUT_FILE"
+
+# Create build directory
+mkdir -p "$BUILD_DIR"
+
+# Copy necessary files
+echo -e "${YELLOW}Copying files for DXT build...${NC}"
+cp -r dist "$BUILD_DIR/"
+cp manifest.json "$BUILD_DIR/"
+cp package.json "$BUILD_DIR/"
+
+# Build the DXT file
+echo -e "${YELLOW}Packaging DXT file...${NC}"
+cd "$BUILD_DIR"
+npx @anthropic-ai/dxt pack . "../$OUTPUT_FILE"
+cd ..
+
+# Clean up build directory
+rm -rf "$BUILD_DIR"
+
+echo -e "${GREEN}✅ DXT file created: $OUTPUT_FILE${NC}"
+echo -e "${YELLOW}To sign the DXT file, run: npm run dxt:sign${NC}"
