@@ -90,8 +90,6 @@ async function sendEmail({
       ],
     };
   } catch (error) {
-    console.error("Error sending email:", error);
-
     const errorMessage = error instanceof Error ? error.message : String(error);
 
     return {
