@@ -27,7 +27,22 @@ Before using this MCP server, you need to:
 
 [![Install with Node in VS Code](https://img.shields.io/badge/VS_Code-Node-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=mailtrap&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-mailtrap%22%5D%2C%22env%22%3A%7B%22MAILTRAP_API_TOKEN%22%3A%22%24%7Binput%3AmailtrapApiToken%7D%22%2C%22DEFAULT_FROM_EMAIL%22%3A%22%24%7Binput%3AsenderEmail%7D%22%2C%22MAILTRAP_ACCOUNT_ID%22%3A%22%24%7Binput%3AmailtrapAccountId%7D%22%7D%7D&inputs=%5B%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22mailtrapApiToken%22%2C%22description%22%3A%22Mailtrap+API+Token%22%2C%22password%22%3Atrue%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22senderEmail%22%2C%22description%22%3A%22Sender+Email+Address%22%7D%2C%7B%22type%22%3A%22promptString%22%2C%22id%22%3A%22mailtrapAccountId%22%2C%22description%22%3A%22Mailtrap+Account+ID%22%7D%5D)
 
+### Claude Desktop Extension (DXT)
 
+For easy installation in Claude Desktop, you can build and install a DXT file:
+
+```bash
+# Build the DXT file
+npm run dxt:build
+
+# Sign the DXT file (optional, for distribution)
+npm run dxt:sign
+
+# Get information about the DXT file
+npm run dxt:info
+```
+
+This creates a `mailtrap-mcp.dxt` file that you can install directly in Claude Desktop. The DXT file includes all necessary dependencies and can be distributed to users.
 
 ## Setup
 
