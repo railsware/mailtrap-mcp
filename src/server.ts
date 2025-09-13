@@ -1,6 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import dotenv from "dotenv";
 import CONFIG from "./config";
 
 import { sendEmailSchema, sendEmail } from "./tools/sendEmail";
@@ -15,8 +14,6 @@ import {
   updateTemplateSchema,
 } from "./tools/templates";
 import { sendSandboxEmail, sendSandboxEmailSchema } from "./tools/sandbox";
-
-dotenv.config();
 
 export function createServer(): McpServer {
   const server = new McpServer({

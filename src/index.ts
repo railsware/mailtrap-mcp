@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import "dotenv/config";
 import { createServer, startServer } from "./server";
 
 async function main() {
