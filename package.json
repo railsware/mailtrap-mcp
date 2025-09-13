@@ -9,6 +9,7 @@
   "bugs": "https://github.com/railsware/mailtrap-mcp/issues",
   "bin": {
     "mcp-mailtrap-server": "dist/index.js",
+    "mcp-mailtrap": "dist/index.js",
     "mailtrap-dxt": "dist/dxt.js"
   },
   "dxt": {
