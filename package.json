@@ -30,7 +30,9 @@
           "dist/index.js"
         ],
         "env": {
-          "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}"
+          "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}",
+          "MAILTRAP_ACCOUNT_ID": "${env:MAILTRAP_ACCOUNT_ID}",
+          "MAILTRAP_TEST_INBOX_ID": "${env:MAILTRAP_TEST_INBOX_ID}"
         }
       }
     }
