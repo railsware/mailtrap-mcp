@@ -36,9 +36,7 @@
     }
   },
   "files": [
-    "dist/**/*",
-    "dxt.json",
-    ".dxt"
+    "dist/**/*"
   ],
   "engines": {
     "node": ">=16.20.1",
