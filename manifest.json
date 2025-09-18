@@ -1,31 +1,266 @@
 {
-  "dxt_version": "0.1",
-  "name": "Mailtrap",
+  "mcpb_version": "0.1",
+  "name": "mailtrap-mcpb",
   "version": "0.0.3",
-  "description": "Send emails and manage templates using Mailtrap",
+  "description": "MCP Bundle for sending emails and managing templates using Mailtrap",
   "author": {
-    "name": "Railsware Products Studio LLC"
-  },
-  "server": {
-    "type": "node",
-    "entry_point": "dist/dxt.js",
-    "mcp_config": {
-      "command": "node",
-      "args": [
-        "${__dirname}/dist/dxt.js"
-      ],
-      "env": {
-        "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}",
-        "DEFAULT_FROM_EMAIL": "${env:DEFAULT_FROM_EMAIL}",
-        "MAILTRAP_ACCOUNT_ID": "${env:MAILTRAP_ACCOUNT_ID}",
-        "MAILTRAP_TEST_INBOX_ID": "${env:MAILTRAP_TEST_INBOX_ID}"
-      }
-    }
+    "name": "Railsware Products Studio LLC",
+    "email": "support@mailtrap.io"
   },
   "license": "MIT",
   "homepage": "https://mailtrap.io",
   "repository": {
     "type": "git",
     "url": "https://github.com/railsware/mailtrap-mcp"
+  },
+  "keywords": [
+    "mcp",
+    "mailtrap",
+    "email",
+    "templates",
+    "sandbox",
+    "transactional"
+  ],
+  "capabilities": [
+    "tools"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/mcpb-server.js",
+    "command": "node",
+    "args": [
+      "${__dirname}/dist/mcpb-server.js"
+    ],
+    "env": {
+      "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}",
+      "DEFAULT_FROM_EMAIL": "${env:DEFAULT_FROM_EMAIL}",
+      "MAILTRAP_ACCOUNT_ID": "${env:MAILTRAP_ACCOUNT_ID}",
+      "MAILTRAP_TEST_INBOX_ID": "${env:MAILTRAP_TEST_INBOX_ID}"
+    }
+  },
+  "tools": [
+    {
+      "name": "send-email",
+      "description": "Send transactional email using Mailtrap",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address of the sender (optional with default)"
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email",
+                "description": "Single email address"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "description": "Array of email addresses"
+              }
+            ],
+            "description": "Email address(es) of the recipient(s) - can be a single email or array of emails"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Email subject line"
+          },
+          "text": {
+            "type": "string",
+            "description": "Email body text"
+          },
+          "html": {
+            "type": "string",
+            "description": "Optional HTML version of the email body"
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "description": "Optional CC recipients"
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "description": "Optional BCC recipients"
+          },
+          "category": {
+            "type": "string",
+            "description": "Email category for tracking"
+          }
+        },
+        "required": ["to", "subject", "category"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "create-template",
+      "description": "Create a new email template",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the template"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Email subject line"
+          },
+          "html": {
+            "type": "string",
+            "description": "HTML content of the template (optional)"
+          },
+          "text": {
+            "type": "string",
+            "description": "Plain text version of the template (optional)"
+          },
+          "category": {
+            "type": "string",
+            "description": "Template category (optional, defaults to 'General')"
+          }
+        },
+        "required": ["name", "subject"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "list-templates",
+      "description": "List all email templates",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "update-template",
+      "description": "Update an existing email template",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "template_id": {
+            "type": "number",
+            "description": "ID of the template to update"
+          },
+          "name": {
+            "type": "string",
+            "description": "New name for the template"
+          },
+          "subject": {
+            "type": "string",
+            "description": "New email subject line"
+          },
+          "html": {
+            "type": "string",
+            "description": "New HTML content of the template"
+          },
+          "text": {
+            "type": "string",
+            "description": "New plain text version of the template"
+          },
+          "category": {
+            "type": "string",
+            "description": "New category for the template"
+          }
+        },
+        "required": ["template_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "delete-template",
+      "description": "Delete an existing email template",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "template_id": {
+            "type": "number",
+            "description": "ID of the template to delete"
+          }
+        },
+        "required": ["template_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "send-sandbox-email",
+      "description": "Send email in sandbox mode to a test inbox",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address of the sender"
+          },
+          "to": {
+            "type": "string",
+            "description": "Email addresses (comma-separated or single)"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Email subject line"
+          },
+          "text": {
+            "type": "string",
+            "description": "Email body text"
+          },
+          "html": {
+            "type": "string",
+            "description": "Optional HTML version of the email body"
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "description": "Optional CC recipients"
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "description": "Optional BCC recipients"
+          },
+          "category": {
+            "type": "string",
+            "description": "Optional email category for tracking"
+          }
+        },
+        "required": ["from", "to", "subject"],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "requirements": {
+    "node": ">=16.20.1"
+  },
+  "setup": {
+    "instructions": [
+      "1. Install dependencies: npm install",
+      "2. Set environment variables:",
+      "   - MAILTRAP_API_TOKEN: Your Mailtrap API token (required)",
+      "   - DEFAULT_FROM_EMAIL: Default sender email (optional)",
+      "   - MAILTRAP_ACCOUNT_ID: Your Mailtrap account ID (optional)",
+      "   - MAILTRAP_TEST_INBOX_ID: Test inbox ID for sandbox mode (optional)",
+      "3. Build the bundle: npm run build",
+      "4. Run the server: node dist/mcpb-server.js"
+    ]
   }
 }
