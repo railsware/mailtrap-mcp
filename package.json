@@ -10,32 +10,7 @@
   "bin": {
     "mcp-mailtrap-server": "dist/index.js",
     "mcp-mailtrap": "dist/index.js",
-    "mailtrap-dxt": "dist/dxt.js"
-  },
-  "dxt": {
-    "name": "Mailtrap",
-    "description": "Send emails and manage templates using Mailtrap",
-    "version": "0.0.3",
-    "author": "Railsware Products Studio LLC",
-    "homepage": "https://mailtrap.io",
-    "repository": "https://github.com/railsware/mailtrap-mcp",
-    "main": "dist/dxt.js",
-    "capabilities": [
-      "mcp"
-    ],
-    "mcpServers": {
-      "mailtrap": {
-        "command": "node",
-        "args": [
-          "dist/index.js"
-        ],
-        "env": {
-          "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}",
-          "MAILTRAP_ACCOUNT_ID": "${env:MAILTRAP_ACCOUNT_ID}",
-          "MAILTRAP_TEST_INBOX_ID": "${env:MAILTRAP_TEST_INBOX_ID}"
-        }
-      }
-    }
+    "mailtrap-mcpb-server": "dist/mcpb-server.js"
   },
   "files": [
     "dist/**/*"
@@ -49,14 +24,14 @@
     "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint:tsc": "tsc -p . --noEmit --incremental false",
     "build": "shx rm -rf dist && tsc --project tsconfig.build.json",
-    "prepublish": "npm run build && shx chmod +x dist/index.js dist/dxt.js",
+    "prepublish": "npm run build && shx chmod +x dist/index.js dist/mcpb-server.js",
     "dev": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "dev:mcpb": "npx @modelcontextprotocol/inspector node dist/mcpb-server.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "dxt:build": "bin/build-dxt",
-    "dxt:sign": "npx @anthropic-ai/dxt sign mailtrap-mcp.dxt",
-    "dxt:info": "npx @anthropic-ai/dxt info mailtrap-mcp.dxt"
+    "mcpb:sign": "npx @anthropic-ai/mcpb sign mailtrap-mcp.mcpb",
+    "mcpb:info": "npx @anthropic-ai/mcpb info mailtrap-mcp.mcpb"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
@@ -65,7 +40,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@anthropic-ai/dxt": "^0.2.6",
+    "@anthropic-ai/mcpb": "^0.0.0",
     "@modelcontextprotocol/inspector": "^0.14.1",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.13.13",
