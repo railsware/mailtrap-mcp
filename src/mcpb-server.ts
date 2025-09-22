@@ -40,7 +40,7 @@ class Logger {
     }
 
     if (level === "info") {
-      console.log(JSON.stringify(logEntry));
+      console.error(JSON.stringify(logEntry));
       return;
     }
 
