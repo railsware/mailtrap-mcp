@@ -32,14 +32,17 @@ Before using this MCP server, you need to:
 For easy installation in hosts that support MCP Bundles, you can distribute an `.mcpb` bundle file.
 
 ```bash
-# Get information about the bundle (optional)
+# Build TypeScript and pack the MCPB bundle
+npm run mcpb:pack
+
+# Inspect bundle metadata
 npm run mcpb:info
 
 # Sign the bundle for distribution (optional)
 npm run mcpb:sign
 ```
 
-If you need a bundle file, create `mailtrap-mcp.mcpb` per MCPB tooling and include this repository's `manifest.json` and built artifacts.
+This creates `mailtrap-mcp.mcpb` using the repository `manifest.json` and built artifacts in `dist/`.
 
 ## Setup
 
@@ -369,6 +372,8 @@ Enable debug logging by setting `DEBUG=true`.
 # Example: enable debug logging
 DEBUG=true node dist/mcpb-server.js
 ```
+
+> Important: The server writes logs to stderr so stdout remains reserved for JSON-RPC frames. This prevents hosts from encountering JSON parsing errors due to interleaved logs.
 
 Log analysis example using `jq`:
 
