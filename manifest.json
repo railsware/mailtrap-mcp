@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.1",
+  "dxt_version": "0.1",
   "name": "mailtrap-mcpb",
   "version": "0.0.3",
   "description": "MCP Bundle for sending emails and managing templates using Mailtrap",
@@ -17,10 +17,8 @@
     "type": "node",
     "entry_point": "dist/mcpb-server.js",
     "mcp_config": {
-      "command": "node",
-      "args": [
-        "${__dirname}/dist/mcpb-server.js"
-      ],
+      "command": "/usr/bin/env",
+      "args": ["node", "${__dirname}/dist/mcpb-server.js"],
       "env": {
         "MAILTRAP_API_TOKEN": "${env:MAILTRAP_API_TOKEN}",
         "DEFAULT_FROM_EMAIL": "${env:DEFAULT_FROM_EMAIL}",
