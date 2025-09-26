@@ -16,6 +16,10 @@ async function sendEmail({
   html,
 }: SendMailToolRequest): Promise<{ content: any[]; isError?: boolean }> {
   try {
+    if (!client) {
+      throw new Error("MAILTRAP_API_TOKEN environment variable is required");
+    }
+
     if (!html && !text) {
       throw new Error("Either HTML or TEXT body is required");
     }
