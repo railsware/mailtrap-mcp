@@ -34,7 +34,7 @@
       "type": "string",
       "title": "Mailtrap API Token",
       "description": "Your Mailtrap API token for authentication",
-      "sensitive": false,
+      "sensitive": true,
       "required": true
     },
     "default_from_email": {
