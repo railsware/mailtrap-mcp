@@ -9,8 +9,7 @@
   "bugs": "https://github.com/railsware/mailtrap-mcp/issues",
   "bin": {
     "mcp-mailtrap-server": "dist/index.js",
-    "mcp-mailtrap": "dist/index.js",
-    "mailtrap-mcpb-server": "dist/mcpb-server.js"
+    "mcp-mailtrap": "dist/index.js"
   },
   "files": [
     "dist/**/*"
@@ -24,9 +23,9 @@
     "lint:eslint": "npx eslint . --ext .js,.ts",
     "lint:tsc": "tsc -p . --noEmit --incremental false",
     "build": "shx rm -rf dist && tsc --project tsconfig.build.json",
-    "prepublish": "npm run build && shx chmod +x dist/index.js dist/mcpb-server.js",
+    "prepublish": "npm run build && shx chmod +x dist/index.js",
     "dev": "npx @modelcontextprotocol/inspector node dist/index.js",
-    "dev:mcpb": "npx @modelcontextprotocol/inspector node dist/mcpb-server.js",
+    "dev:mcpb": "npx @modelcontextprotocol/inspector node dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
