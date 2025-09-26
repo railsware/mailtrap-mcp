@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import "dotenv/config";
-import { createServer, startServer } from "./server";
+import { createServer, startServer } from "./server.js";
 
 async function main() {
   const server = createServer();
