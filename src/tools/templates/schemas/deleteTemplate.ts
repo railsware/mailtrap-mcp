@@ -3,11 +3,11 @@ const deleteTemplateSchema = {
   properties: {
     template_id: {
       type: "number",
-      description: "ID of the template to delete"
-    }
+      description: "ID of the template to delete",
+    },
   },
   required: ["template_id"],
-  additionalProperties: false
+  additionalProperties: false,
 };
 
 export default deleteTemplateSchema;

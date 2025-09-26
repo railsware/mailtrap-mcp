@@ -1,7 +1,7 @@
 const listTemplatesSchema = {
   type: "object",
   properties: {},
-  additionalProperties: false
+  additionalProperties: false,
 };
 
 export default listTemplatesSchema;
