@@ -1,4 +1,5 @@
 import { MailtrapClient } from "mailtrap";
+import config from "./config";
 
 const { MAILTRAP_API_TOKEN } = process.env;
 
@@ -6,6 +7,7 @@ const { MAILTRAP_API_TOKEN } = process.env;
 const client = MAILTRAP_API_TOKEN
   ? new MailtrapClient({
       token: MAILTRAP_API_TOKEN,
+      userAgent: config.USER_AGENT,
       // conditionally set accountId if it's a valid number
       ...(process.env.MAILTRAP_ACCOUNT_ID &&
       !Number.isNaN(Number(process.env.MAILTRAP_ACCOUNT_ID))
@@ -23,6 +25,7 @@ const sandboxClient =
   !Number.isNaN(Number(process.env.MAILTRAP_TEST_INBOX_ID))
     ? new MailtrapClient({
         token: MAILTRAP_API_TOKEN,
+        userAgent: config.USER_AGENT,
         testInboxId: Number(process.env.MAILTRAP_TEST_INBOX_ID),
         sandbox: true,
         // conditionally set accountId if it's a valid number
